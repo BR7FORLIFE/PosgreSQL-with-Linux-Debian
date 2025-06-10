@@ -30,11 +30,9 @@ public class TaskService {
 
     public void aggTask(Task task) {
         try {
-            UUID.fromString(task.getId());
             if (task.getIsComplete() instanceof Boolean && task.getIsProgress() instanceof Boolean) {
                 taskRepositoryImp.aggTask(task);
             }
-
         } catch (IllegalArgumentException e) {
             System.out.println(e);
         }
@@ -42,7 +40,6 @@ public class TaskService {
 
     public void updateTask(Task task) {
         try {
-            UUID.fromString(task.getId());
             if (task.getIsComplete() instanceof Boolean && task.getIsProgress() instanceof Boolean) {
                 taskRepositoryImp.updateTask(task);
             }
