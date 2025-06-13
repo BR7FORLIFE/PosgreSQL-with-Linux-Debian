@@ -5,8 +5,8 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
+import com.archives.crudtask.TaskRepositoryImp;
 import com.archives.crudtask.models.Task;
-import com.archives.crudtask.repository.TaskRepositoryImp;
 
 @Service
 public class TaskService {

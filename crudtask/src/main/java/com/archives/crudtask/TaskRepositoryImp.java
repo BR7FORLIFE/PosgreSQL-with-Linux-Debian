@@ -1,4 +1,4 @@
-package com.archives.crudtask.repository;
+package com.archives.crudtask;
 
 import java.util.List;
 import java.util.UUID;
