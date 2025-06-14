@@ -5,8 +5,8 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-import com.archives.crudtask.TaskRepositoryImp;
 import com.archives.crudtask.models.Task;
+import com.archives.crudtask.repository.TaskRepositoryImp;
 
 @Service
 public class TaskService {
@@ -20,12 +20,16 @@ public class TaskService {
         return taskRepositoryImp.getAllTask();
     }
 
+    public Task getTaskById(UUID id){
+        return taskRepositoryImp.getTaskById(id);
+    }
+
     public List<Task> getTaskByCompleteOrIncomplete(boolean isComplete) {
         return taskRepositoryImp.getTaskByCompleteOrIncomplete(isComplete);
     }
 
-    public List<Task> getTaskByProgress() {
-        return taskRepositoryImp.getTaskByProgress();
+    public List<Task> getTaskByProgress(boolean isProgress) {
+        return taskRepositoryImp.getTaskByProgress(isProgress);
     }
 
     public void aggTask(Task task) {

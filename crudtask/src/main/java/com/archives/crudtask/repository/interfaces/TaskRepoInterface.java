@@ -7,8 +7,9 @@ import com.archives.crudtask.models.Task;
 
 public interface TaskRepoInterface {
     List<Task> getAllTask();
+    Task getTaskById(UUID id);
     List<Task> getTaskByCompleteOrIncomplete(boolean isComplete);
-    List<Task> getTaskByProgress();
+    List<Task> getTaskByProgress(boolean isProgress);
     void aggTask(Task task);
     void updateTask(Task task);
     void deleteTask(UUID id);

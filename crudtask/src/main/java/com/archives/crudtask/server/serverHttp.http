@@ -3,15 +3,16 @@ GET http://localhost:8080/task
 
 
 ### obtener las tareas completadas o imcompletas
-GET http://localhost:8080/task/iscomplete/true
+GET http://localhost:8080/task/iscomplete/false
 
+### obtener una tarea por id
+GET http://localhost:8080/task/80527ccc-2103-4248-94f5-85d71e27ce66
 
 ### obtener las tareas en progreso
-GET http://localhost:8080/task/progress
+GET http://localhost:8080/task/progress/true
 
 ###
 POST http://localhost:8080/task
-
 Content-Type: application/json
 Accept: application/json
 
@@ -24,13 +25,11 @@ Accept: application/json
 
 ### actualizar una tarea por completo
 
-PUT http://localhost:8080/task/update
-
+PUT http://localhost:8080/task/update/3f44ac30-359b-4e07-834a-dada1b37b30c
 Content-Type: application/json
 Accept: application/json
 
 {
-    "id" : "3f44ac30-359b-4e07-834a-dada1b37b30c",
     "content" : "Programar en html, css y javascript",
     "isComplete" : true,
     "isProgress": false

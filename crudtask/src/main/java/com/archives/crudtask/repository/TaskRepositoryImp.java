@@ -1,4 +1,4 @@
-package com.archives.crudtask;
+package com.archives.crudtask.repository;
 
 import java.util.List;
 import java.util.UUID;
@@ -14,7 +14,7 @@ import com.archives.crudtask.repository.interfaces.TaskRepoInterface;
 public class TaskRepositoryImp implements TaskRepoInterface {
 
     private final JdbcTemplate jdbcTemplate;
-    private final String query = "SELECT content, iscomplete, isprogress FROM tasktable";
+    private final String query = "SELECT id, content, iscomplete, isprogress FROM tasktable";
 
     public TaskRepositoryImp(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -35,32 +35,43 @@ public class TaskRepositoryImp implements TaskRepoInterface {
     }
 
     @Override
+    public Task getTaskById(UUID id){
+        String getQuery = query + " WHERE id = ?";
+        return jdbcTemplate.queryForObject(getQuery, taskRowMapper, id);
+    }
+
+    @Override
     public List<Task> getTaskByCompleteOrIncomplete(boolean isComplete) {
         String newQuery = query + " WHERE iscomplete = ?";
         return jdbcTemplate.query(newQuery, taskRowMapper, isComplete);
     }
 
     @Override
-    public List<Task> getTaskByProgress() {
+    public List<Task> getTaskByProgress(boolean isProgress) {
         String newQuery = query + " WHERE isprogress = ?";
-        return jdbcTemplate.query(newQuery, taskRowMapper);
+        return jdbcTemplate.query(newQuery, taskRowMapper, isProgress);
     }
 
     @Override
     public void aggTask(Task task) {
-        String query = "INSERT INTO tasktable (id, content, iscomplete, isprogress) VALUES(?,?,?,?)";
-        jdbcTemplate.update(query, task.getId(), task.getContent(), task.getIsComplete(), task.getIsProgress());
+        String aggQuery = "INSERT INTO tasktable (id, content, iscomplete, isprogress) VALUES(?,?,?,?)";
+        jdbcTemplate.update(aggQuery, task.getId(), task.getContent(), task.getIsComplete(), task.getIsProgress());
     }
 
     @Override
     public void updateTask(Task task) {
-        String query = "UPDATE tasktable SET content = ?, iscomplete = ?, isprogress = ?  WHERE id = ?";
-        jdbcTemplate.update(query, task.getContent(), task.getIsComplete(), task.getIsProgress(), task.getId());
+        if (task == null || task.getId() == null) {
+            throw new IllegalArgumentException("Tarea o ID no puede ser null");
+        }
+
+        final String updateQuery = "UPDATE tasktable SET content = ? , iscomplete = ? , isprogress = ? WHERE id = ?";
+        jdbcTemplate.update(updateQuery, task.getContent(), task.getIsComplete(), task.getIsProgress(),
+                task.getId());
     }
 
     @Override
     public void deleteTask(UUID id) {
-        String query = "DELETE FROM tasktable WHERE id = ?";
-        jdbcTemplate.update(query, id);
+        String deleteQuery = "DELETE FROM tasktable WHERE id = ?";
+        jdbcTemplate.update(deleteQuery, id);
     }
 }
