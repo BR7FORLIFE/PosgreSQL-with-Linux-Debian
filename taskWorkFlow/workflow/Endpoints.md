@@ -8,9 +8,11 @@
 
 #### 2. ENDPOINT - Client
 
-- GET /api/user/me --> informacion del usuario **(ruta protegida)**
+- 
+
 
 #### 3- ENDPOINT - TASK
+- GET /api/project/{client_id} **(ruta protegida)**  <p> Permite acceder a todas las tareas segun la id del cliente<p>
 
 - POST api/task --> Crear una tarea **(ruta protegida)**
 - GET /api/tasks -->  Listar todas las tareas **(ruta protegida)**

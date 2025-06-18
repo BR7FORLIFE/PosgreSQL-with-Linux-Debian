@@ -29,7 +29,7 @@ public class ProjectService {
         }
     }
 
-    public List<Projects> getAllProjectForUser(){
-        return projectRepositoryImp.getAllProjectForUser();
+    public List<Projects> getAllProjectForUser(UUID id){
+        return projectRepositoryImp.getAllProjectForUser(id);
     }
 }
