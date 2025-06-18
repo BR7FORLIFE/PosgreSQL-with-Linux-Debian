@@ -11,6 +11,8 @@ public class Client {
     private String password;
     private String rol;
 
+    public Client(){}
+
     public UUID getId() {
         return id;
     }

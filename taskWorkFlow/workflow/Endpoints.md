@@ -6,7 +6,7 @@
 - POST  /api/auth/login --> iniciar sesión **(ruta sin proteccción)**
 
 
-#### 2. ENDPOINT - USERS
+#### 2. ENDPOINT - Client
 
 - GET /api/user/me --> informacion del usuario **(ruta protegida)**
 
