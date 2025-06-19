@@ -24,12 +24,12 @@ public class ProjectRepositoryImp implements ProjectRepositoryInterface {
     private final RowMapper<Projects> rowMapperTemplate = (resultSet, row) -> {
         Projects projects = new Projects();
         Client client = new Client();
-        
+
         projects.setId(resultSet.getInt("id"));
         projects.setName(resultSet.getString("name"));
         projects.setDescription(resultSet.getString("description"));
         projects.setDate(resultSet.getDate("date"));
-    
+
         client.setId(UUID.fromString(resultSet.getString("client_id")));
         projects.setClient(client);
 
@@ -47,28 +47,23 @@ public class ProjectRepositoryImp implements ProjectRepositoryInterface {
 
     @Override
     public List<Projects> getAllProjectForUser(UUID id) {
-        return jdbcTemplate.query(readQuery, rowMapperTemplate);
+        return jdbcTemplate.query(readQuery, rowMapperTemplate, id);
     }
 
     @Override
-    public Projects getProjectById(int id){
+    public Projects getProjectById(int id) {
         String newQuery = readQuery + " WHERE id = ?";
-        return jdbcTemplate.queryForObject(newQuery, rowMapperTemplate);
-    }
-    // este es jodido
-    @Override
-    public Projects getDetailsProjectForUser(Projects projects) {
-        return null;
+        return jdbcTemplate.queryForObject(newQuery, rowMapperTemplate, id);
     }
 
-    //update
+    // update
     @Override
     public void editProject(Projects project) {
-       jdbcTemplate.update(updateQuery, project.getName(), project.getDescription(), project.getId());
+        jdbcTemplate.update(updateQuery, project.getName(), project.getDescription(), project.getId());
     }
 
     @Override
     public void deleteProject(int id) {
-        jdbcTemplate.update(deleteQuery);
+        jdbcTemplate.update(deleteQuery, id);
     }
 }

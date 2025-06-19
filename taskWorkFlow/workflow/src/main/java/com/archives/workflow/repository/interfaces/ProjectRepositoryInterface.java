@@ -12,7 +12,6 @@ public interface  ProjectRepositoryInterface {
     //read
     List<Projects> getAllProjectForUser(UUID id);
     Projects getProjectById(int id);
-    Projects getDetailsProjectForUser(Projects projects); //<-- esto pq hay un atributo Client que permite saber de que usario es
 
     //update
     void editProject(Projects project);

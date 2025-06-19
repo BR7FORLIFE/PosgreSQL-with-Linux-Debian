@@ -32,4 +32,16 @@ public class ProjectService {
     public List<Projects> getAllProjectForUser(UUID id){
         return projectRepositoryImp.getAllProjectForUser(id);
     }
+
+    public Projects getProjectById(int id){
+        return projectRepositoryImp.getProjectById(id);
+    }
+
+    public void editProject(Projects project){
+        projectRepositoryImp.editProject(project);
+    }
+
+    public void deleteProject(int id){
+        projectRepositoryImp.deleteProject(id);
+    }
 }

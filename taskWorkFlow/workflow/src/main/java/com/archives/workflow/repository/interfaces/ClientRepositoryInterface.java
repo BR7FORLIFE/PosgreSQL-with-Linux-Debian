@@ -10,12 +10,13 @@ public interface  ClientRepositoryInterface {
     List<Client> getAllClient();
     Client getClientbyId(UUID id);
     Client getForRol(Client client);
+    Boolean getExitsForClient(UUID id);
 
     //create
     void saveClient(Client client);
 
     //update
-    Client updateClient(UUID id);
+    void updateClient(Client client);
 
     //delete
     void deleteClient(UUID id);
