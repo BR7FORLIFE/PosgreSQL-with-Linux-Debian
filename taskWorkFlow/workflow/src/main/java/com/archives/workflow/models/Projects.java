@@ -1,13 +1,17 @@
 package com.archives.workflow.models;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+import com.archives.workflow.models.enums.STATUS;
 
 public class Projects {
     private int id;
     private String name;
     private String description;
-    private Date date;
-    private Client client;
+    private LocalDateTime  date;
+    private STATUS status;
+    private UUID client_id;
 
     public int getId() {
         return id;
@@ -33,19 +37,27 @@ public class Projects {
         this.description = description;
     }
 
-    public Date getDate() {
+    public void setStatus(STATUS status) {
+        this.status = status;
+    }
+
+    public STATUS getStatus() {
+        return status;
+    }
+
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
-    public Client getClient() {
-        return client;
+    public void setClient_id(UUID client_id) {
+        this.client_id = client_id;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public UUID getClient_id() {
+        return client_id;
     }
 }

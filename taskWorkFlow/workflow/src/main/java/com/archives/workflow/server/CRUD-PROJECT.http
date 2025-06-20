@@ -1,0 +1,39 @@
+### CREATE UN PROJECT BY ID OF CLIENT
+
+POST http://localhost:8080/api/project/create/4ec1ae49-8a88-48fb-97ef-6039ecc53b34
+Content-Type: application/json
+Accept: application/json
+
+{
+    "id": 1,
+    "name": "crear una galeria gracias a tailwind",
+    "description":"este proyecto me ayudara a mejorar mis skills en frontend",
+    "status": "progress"
+}
+
+### READ PROJECT BY CLIENT ID
+
+GET http://localhost:8080/api/project/read/4ec1ae49-8a88-48fb-97ef-6039ecc53b34
+
+
+### GET A ONE PROJECT BY CLIENT ID  
+
+GET http://localhost:8080/api/read/4ec1ae49-8a88-48fb-97ef-6039ecc53b34/1
+
+### update a one project
+
+PUT http://localhost:8080/api/project/delete/4ec1ae49-8a88-48fb-97ef-6039ecc53b34/1
+Content-Type: application/json
+Accept: application/json
+
+{
+    "id":1,
+    "name":"crear un formulario con nextjs",
+    "description":"este proyecto me ayudara a mejorar en nextjs",
+    "status":"completed"
+}
+
+### delete project by ID
+
+DELETE http://localhost:8080/api/project/delete/4ec1ae49-8a88-48fb-97ef-6039ecc53b34/1
+
