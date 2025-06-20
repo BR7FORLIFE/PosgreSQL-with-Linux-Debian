@@ -1,0 +1,52 @@
+### GET ALL CLIENT
+
+GET http://localhost:8080/api/client/all
+
+### GET CLIENT BY ID    
+
+GET http://localhost:8080/api/client/4ec1ae49-8a88-48fb-97ef-6039ecc53b34
+
+
+### GET CLIENT WITH ROL 
+
+GET http://localhost:8080/api/client/rol/4ec1ae49-8a88-48fb-97ef-6039ecc53b34
+
+### GET CLIENT IF EXITS 
+
+GET http://localhost:8080/api/client/exists/4ec1ae49-8a88-48fb-97ef-6039ecc53b34
+
+
+### CREATE A CLIENT WITH POST HTTP
+
+POST http://localhost:8080/api/client/create
+Content-Type: application/json
+Accept: application/json
+
+{
+    "id": "4ec1ae49-8a88-48fb-97ef-6039ecc53b34",
+    "name": "bryan",
+    "lastname":"diaz",
+    "email":"diazdaskdhak@jslsjf",
+    "username":"br7forlife",
+    "password":"12345",
+    "rol":"admin"
+}
+
+### UPDATE CLIENT BY ID
+
+PUT http://localhost:8080/api/client/create/4ec1ae49-8a88-48fb-97ef-6039ecc53b34
+Content-Type: application/json
+Accept: application/json
+
+{
+    "name": "juan",
+    "lastname":"perez",
+    "email":"juanperez@hkhkhfksd",
+    "username":"juanperez",
+    "password":"12324344",
+    "rol":"moderator"
+}
+
+### DELETE CLIENT BY ID
+
+DELETE http://localhost:8080/api/client/4ec1ae49-8a88-48fb-97ef-6039ecc53b34

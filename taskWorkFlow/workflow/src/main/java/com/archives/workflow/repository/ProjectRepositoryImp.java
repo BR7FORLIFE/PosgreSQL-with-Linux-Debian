@@ -7,31 +7,33 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.archives.workflow.models.Client;
 import com.archives.workflow.models.Projects;
+import com.archives.workflow.models.enums.STATUS;
 import com.archives.workflow.repository.interfaces.ProjectRepositoryInterface;
 
 @Repository
 public class ProjectRepositoryImp implements ProjectRepositoryInterface {
 
     private final JdbcTemplate jdbcTemplate;
-    private final String readQuery = "SELECT id, name, description, date, client_id FROM projects";
-    private final String createQuery = "INSERT INTO projects(id, name, description, date, client_id) VALUES (?,?,?,?,?)";
-    private final String updateQuery = "UPDATE projects SET name = ?, description = ? WHERE id = ?";
+    private final String readQuery = "SELECT id, name, description, date, status , client_id FROM projects";
+    private final String createQuery = "INSERT INTO projects(id, name, description, date, status ,client_id) VALUES (?,?,?,?,?,?)";
+    private final String updateQuery = "UPDATE projects SET name = ?, description = ?, status = ? WHERE id = ?";
 
     private final String deleteQuery = "DELETE FROM projects WHERE id = ?";
 
     private final RowMapper<Projects> rowMapperTemplate = (resultSet, row) -> {
         Projects projects = new Projects();
-        Client client = new Client();
-
         projects.setId(resultSet.getInt("id"));
         projects.setName(resultSet.getString("name"));
         projects.setDescription(resultSet.getString("description"));
-        projects.setDate(resultSet.getDate("date"));
+        // Convertir el string de la DB a enum
+        projects.setStatus(STATUS.valueOf(resultSet.getString("status")));
 
-        client.setId(UUID.fromString(resultSet.getString("client_id")));
-        projects.setClient(client);
+        // Convertir el timestamp a LocalDateTime (o LocalDate según uses)
+        projects.setDate(resultSet.getTimestamp("date").toLocalDateTime());
+
+        // Suponiendo que tienes client_id también en Projects
+        projects.setClient_id(UUID.fromString(resultSet.getString("client_id")));
 
         return projects;
     };
@@ -42,7 +44,7 @@ public class ProjectRepositoryImp implements ProjectRepositoryInterface {
 
     @Override
     public void createProject(Projects project) {
-        jdbcTemplate.update(createQuery);
+        jdbcTemplate.update(createQuery,project.getId(), project.getName(), project.getDescription(), project.getDate(),project.getStatus(),project.getClient_id());
     }
 
     @Override
