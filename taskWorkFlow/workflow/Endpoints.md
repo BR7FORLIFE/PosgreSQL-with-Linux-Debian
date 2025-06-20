@@ -1,51 +1,148 @@
-## ENDPOINTS - APLICATION
+## 🚀 ENDPOINTS - APLICATION
 
-#### 1. ENDPOINT - AUTH
+---
 
-- POST  /api/auth/register -->  registrar un nuevo usuario **(ruta sin protección)**
-- POST  /api/auth/login --> iniciar sesión **(ruta sin proteccción)**
+### 🔐 1. ENDPOINT - AUTH
 
+<table>
+  <thead>
+    <tr>
+      <th>Método</th>
+      <th>Ruta</th>
+      <th>Descripción</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code style="color: green; font-weight: bold;">POST</code></td>
+      <td><code>/api/auth/register</code></td>
+      <td>Registrar un nuevo usuario <strong>(ruta sin protección)</strong></td>
+    </tr>
+    <tr>
+      <td><code style="color: green; font-weight: bold;">POST</code></td>
+      <td><code>/api/auth/login</code></td>
+      <td>Iniciar sesión <strong>(ruta sin protección)</strong></td>
+    </tr>
+  </tbody>
+</table>
 
-#### 2. ENDPOINT - Client
+---
 
-- 
+### 👤 2. ENDPOINT - CLIENT
 
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Método</th>
+      <th>Ruta</th>
+      <th>Descripción</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td><code style="color: blue;">GET</code></td>
+      <td><code>/client/all</code></td>
+      <td>Recuperar todos los clientes</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><code style="color: blue;">GET</code></td>
+      <td><code>/client/<span style="color: cyan;">{id}</span></code></td>
+      <td>Obtener cliente por su ID</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><code style="color: blue;">GET</code></td>
+      <td><code>/client/rol/<span style="color: cyan;">{client}</span></code></td>
+      <td>Obtener cliente por rol</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td><code style="color: blue;">GET</code></td>
+      <td><code>/client/exists/<span style="color: cyan;">{id}</span></code></td>
+      <td>verificar si un cliente existe en la DB</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td><code style="color: green;">POST</code></td>
+      <td><code>/client/create/</code></td>
+      <td>Crear un nuevo cliente</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td><code style="color: orange;">PUT</code></td>
+      <td><code>/client/create/<span style="color: cyan;">{id}</span></code></td>
+      <td>modificar un cliente ya existente</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td><code style="color: red;">DELETE</code></td>
+      <td><code>/client/<span style="color: cyan;">{id}</span></code></td>
+      <td>Eliminar un cliente por la ID</td>
+    </tr>
+  </tbody>
+</table>
 
-#### 3- ENDPOINT - TASK
+---
 
-**1.** <span style="font-weight: 700; color: cyan; " >POST<span> <div style="font-size: 15px; color: red; font-weight: 900;">/project/create/<span style="color: cyan">{client_id}</span></div>
+### 📂 3. ENDPOINT - TASK
 
-``` json
-    {
-        name: String,
-        description: String,
-        date: Date
-    }
-```
-
-<p>Este endpoint nos permitira crear un nuevo proyecto segun la id del cliente en este caso<p>
-
-**2.** <span style="font-weight: 700; color: cyan; " >GET<span> <div style="font-size: 15px; color: red; font-weight: 900;">/project/read/<span style="color: cyan">{client_id}</span></div>
-
-<p>Este endpoint nos ayudara a leer o obtener todos los projectos por la id del cliente</p>
-
-**3.** <span style="font-weight: 700; color: cyan; " >GET<span> <div style="font-size: 15px; color: red; font-weight: 900;">/project/read/<span style="color: cyan">{client_id}/{id}</span></div>
-
-<p>Este endpoint nos ayudara a leer o obtener un proyecto en especifico gracias a la id del client y la id del proyecto el cual creó</p>
-
-**4.** <span style="font-weight: 700; color: cyan; " >PUT<span> <div style="font-size: 15px; color: red; font-weight: 900;">/project/update/<span style="color: cyan">{client_id}/{id}</span></div>
-
-``` json
-    {
-        id: number,
-        name: String,
-        description: String,
-        date: Date
-    }
-```
-
-<p>Este endpoint nos ayudara hacer put a una tarea ya creada , con la ayuda del id del cliente y la id del proyecto es podrá modificar la tarea!</p>
-
-**5.** <span style="font-weight: 700; color: cyan; " >DELETE<span> <div style="font-size: 15px; color: red; font-weight: 900;">/project/delete/<span style="color: cyan">{client_id}/{id}</span></div>
-
-<p>Este endpoint nos ayudara a eliminar una tarea por la id del cliente y la id del proyecto!</p>
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Método</th>
+      <th>Ruta</th>
+      <th>Descripción</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td><code style="color: green;">POST</code></td>
+      <td><code>/project/create/<span style="color: cyan;">{client_id}</span></code></td>
+      <td>Crear un nuevo proyecto<br>
+        <strong>Body JSON:</strong>
+        <pre><code>{
+  "name": "string",
+  "description": "string",
+  "date": "yyyy-mm-dd"
+}</code></pre>
+      </td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><code style="color: blue;">GET</code></td>
+      <td><code>/project/read/<span style="color: cyan;">{client_id}</span></code></td>
+      <td>Leer todos los proyectos del cliente</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><code style="color: blue;">GET</code></td>
+      <td><code>/project/read/<span style="color: cyan;">{client_id}/{id}</span></code></td>
+      <td>Leer un proyecto específico por ID</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td><code style="color: orange;">PUT</code></td>
+      <td><code>/project/update/<span style="color: cyan;">{client_id}/{id}</span></code></td>
+      <td>Actualizar proyecto existente<br>
+        <strong>Body JSON:</strong>
+        <pre><code>{
+  "id": 1,
+  "name": "string",
+  "description": "string",
+  "date": "yyyy-mm-dd"
+}</code></pre>
+      </td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td><code style="color: red;">DELETE</code></td>
+      <td><code>/project/delete/<span style="color: cyan;">{client_id}/{id}</span></code></td>
+      <td>Eliminar proyecto por ID</td>
+    </tr>
+  </tbody>
+</table>
