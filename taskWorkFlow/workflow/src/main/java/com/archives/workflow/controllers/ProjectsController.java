@@ -53,7 +53,7 @@ public class ProjectsController {
 
     @PutMapping("/project/update/{client_id}/{id}")
     public void editProject(){
-
+        
     }
 
     @DeleteMapping("/project/delete/{client_id}/{id}")
