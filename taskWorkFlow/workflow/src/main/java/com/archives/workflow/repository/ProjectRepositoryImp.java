@@ -54,19 +54,19 @@ public class ProjectRepositoryImp implements ProjectGlobalInterface {
     }
 
     @Override
-    public Projects getProjectById(int id) {
+    public Projects getProjectById(Integer id) {
         String newQuery = readQuery + " WHERE id = ?";
         return jdbcTemplate.queryForObject(newQuery, rowMapperTemplate, id);
     }
 
     // update
     @Override
-    public void editProject(Projects project) {
+    public void editProject(UUID client_id, Integer id, Projects project) {
         jdbcTemplate.update(updateQuery, project.getName(), project.getDescription(), project.getId());
     }
 
     @Override
-    public void deleteProject(int id) {
+    public void deleteProject(Integer id) {
         jdbcTemplate.update(deleteQuery, id);
     }
 }

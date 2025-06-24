@@ -14,7 +14,7 @@ import com.archives.workflow.models.Client;
 @Repository
 public class ClientRepositoryImp implements ClientGlobalInterface {
     // *jdbc para hacer las querys a la base de datos! */
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     // querys for the client sql
     private String readQuery = "SELECT id, name, lastname, email, username, password, rol FROM clients";
