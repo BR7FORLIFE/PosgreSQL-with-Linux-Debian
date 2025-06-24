@@ -7,16 +7,16 @@ import com.archives.workflow.models.Projects;
 
 public interface ProjectGlobalInterface {
     // create
-    void createProject(UUID client_id,Projects project);
+    void createProject(UUID client_id, Projects project);
 
     // read
     List<Projects> getAllProjectForUser(UUID id);
 
-    Projects getProjectById(int id);
+    Projects getProjectById(Integer id);
 
     // update
-    void editProject(Projects project);
+    void editProject(UUID client_id, Integer id, Projects project);
 
     // delete
-    void deleteProject(int id);
+    void deleteProject(Integer id);
 }
