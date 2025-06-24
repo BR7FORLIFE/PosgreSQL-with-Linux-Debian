@@ -1,21 +1,22 @@
-package com.archives.workflow.repository.interfaces;
+package com.archives.workflow.interfaces;
 
 import java.util.List;
 import java.util.UUID;
 
 import com.archives.workflow.models.Projects;
 
-public interface  ProjectRepositoryInterface {
-    //create
-    void createProject(Projects project);
+public interface ProjectGlobalInterface {
+    // create
+    void createProject(UUID client_id,Projects project);
 
-    //read
+    // read
     List<Projects> getAllProjectForUser(UUID id);
+
     Projects getProjectById(int id);
 
-    //update
+    // update
     void editProject(Projects project);
 
-    //delete
+    // delete
     void deleteProject(int id);
 }

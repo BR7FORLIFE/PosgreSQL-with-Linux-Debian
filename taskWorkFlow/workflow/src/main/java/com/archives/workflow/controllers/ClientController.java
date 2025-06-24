@@ -33,13 +33,19 @@ public class ClientController {
     }
 
     @GetMapping("/client/{id}")
-    public Client getClientById(@PathVariable UUID id) {
-        return clientService.getClientById(id);
+    public ResponseEntity<Client> getClientById(@PathVariable UUID id) {
+        if (!(id instanceof UUID))
+            return ResponseEntity.badRequest().body(new Client());
+        Client _client = clientService.getClientbyId(id);
+        return ResponseEntity.ok().body(_client);
     }
 
     @GetMapping("/client/rol/{client}")
-    public Client getForRol(@PathVariable Client client) {
-        return null;
+    public ResponseEntity<Client> getForRol(@PathVariable Client client) {
+        if (client == null)
+            return ResponseEntity.badRequest().body(new Client());
+        Client _client = clientService.getForRol(client);
+        return ResponseEntity.ok().body(_client);
     }
 
     @GetMapping("/client/exists/{id}")

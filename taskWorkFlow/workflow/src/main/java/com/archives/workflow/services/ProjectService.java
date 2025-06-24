@@ -5,12 +5,13 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
+import com.archives.workflow.interfaces.ProjectGlobalInterface;
 import com.archives.workflow.models.Projects;
 import com.archives.workflow.repository.ClientRepositoryImp;
 import com.archives.workflow.repository.ProjectRepositoryImp;
 
 @Service
-public class ProjectService {
+public class ProjectService implements ProjectGlobalInterface{
     private final ProjectRepositoryImp projectRepositoryImp;
     private final ClientRepositoryImp clientRepositoryImp;
 
@@ -25,7 +26,7 @@ public class ProjectService {
 
 
         if(true){
-            projectRepositoryImp.createProject(project);
+            projectRepositoryImp.createProject(client_id,project);
         }
     }
 
