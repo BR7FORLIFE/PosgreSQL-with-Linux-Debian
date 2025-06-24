@@ -1,6 +1,5 @@
 package com.archives.workflow.repository;
 
-import java.sql.ResultSet;
 import java.util.List;
 import java.util.UUID;
 
@@ -9,12 +8,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.archives.workflow.interfaces.ClientGlobalInterface;
 import com.archives.workflow.models.Client;
-import com.archives.workflow.repository.interfaces.ClientRepositoryInterface;
 
 @Repository
-public class ClientRepositoryImp implements ClientRepositoryInterface {
-
+public class ClientRepositoryImp implements ClientGlobalInterface {
+    // *jdbc para hacer las querys a la base de datos! */
     private JdbcTemplate jdbcTemplate;
 
     // querys for the client sql
@@ -23,7 +22,7 @@ public class ClientRepositoryImp implements ClientRepositoryInterface {
     private String updateQuery = "UPDATE clients SET name = ?, lastname = ?, email = ?, username = ? , password = ?, rol = ? WHERE id = ?";
     private String deleteQuery = "DELETE FROM clients WHERE id = ?";
 
-    //row mapper for define the rows of databse
+    // row mapper for define the rows of databse
     private RowMapper<Client> rowMapperTemplate = (resultSet, row) -> {
         Client client = new Client();
         client.setId(UUID.fromString(resultSet.getString("id")));
@@ -43,7 +42,7 @@ public class ClientRepositoryImp implements ClientRepositoryInterface {
         return client;
     };
 
-    //methods
+    // methods
     public ClientRepositoryImp(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }

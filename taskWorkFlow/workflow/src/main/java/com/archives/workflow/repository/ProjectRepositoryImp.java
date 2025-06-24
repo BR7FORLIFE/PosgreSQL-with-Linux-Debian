@@ -7,12 +7,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.archives.workflow.interfaces.ProjectGlobalInterface;
 import com.archives.workflow.models.Projects;
 import com.archives.workflow.models.enums.STATUS;
-import com.archives.workflow.repository.interfaces.ProjectRepositoryInterface;
 
 @Repository
-public class ProjectRepositoryImp implements ProjectRepositoryInterface {
+public class ProjectRepositoryImp implements ProjectGlobalInterface {
 
     private final JdbcTemplate jdbcTemplate;
     private final String readQuery = "SELECT id, name, description, date, status , client_id FROM projects";
@@ -43,8 +43,9 @@ public class ProjectRepositoryImp implements ProjectRepositoryInterface {
     }
 
     @Override
-    public void createProject(Projects project) {
-        jdbcTemplate.update(createQuery,project.getId(), project.getName(), project.getDescription(), project.getDate(),project.getStatus(),project.getClient_id());
+    public void createProject(UUID id, Projects project) {
+        jdbcTemplate.update(createQuery, project.getId(), project.getName(), project.getDescription(),
+                project.getDate(), project.getStatus(), project.getClient_id());
     }
 
     @Override
