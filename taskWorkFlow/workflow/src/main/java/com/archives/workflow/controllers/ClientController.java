@@ -3,6 +3,7 @@ package com.archives.workflow.controllers;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,22 +50,33 @@ public class ClientController {
     }
 
     @GetMapping("/client/exists/{id}")
-    public Boolean getExitsForClient(@PathVariable UUID id) {
-        return null;
+    public ResponseEntity<?> getExitsForClient(@PathVariable UUID id) {
+        if (id instanceof UUID)
+            return ResponseEntity.badRequest().body("id is null!! verify if is UUID!");
+        return ResponseEntity.ok()
+                .body(String.format("The client by id: %s , exists?: %s", id, clientService.getExitsForClient(id)));
     }
 
     @PostMapping("/client/create")
-    public void saveClient(@RequestBody Client client) {
-
+    public ResponseEntity<String> saveClient(@RequestBody Client client) {
+        if (client == null)
+            return ResponseEntity.badRequest().body("Client is null!");
+        return ResponseEntity.status(HttpStatus.CREATED).body("User created succesfull!");
     }
 
     @PutMapping("/client/create/{id}")
-    public void updateClient(@PathVariable UUID id, @RequestBody Client client) {
-
+    public ResponseEntity<String> updateClient(@PathVariable UUID id, @RequestBody Client client) {
+        if (!(id instanceof UUID))
+            return ResponseEntity.badRequest().body("id not instance of UUID!");
+        if (client == null)
+            return ResponseEntity.badRequest().body("client is null");
+        return ResponseEntity.ok().body("Client update succesfull");
     }
 
     @DeleteMapping("/client/{id}")
-    public void deleteClient(@PathVariable UUID id) {
-
+    public ResponseEntity<String> deleteClient(@PathVariable UUID id) {
+        if (!(id instanceof UUID))
+            return ResponseEntity.badRequest().body("id not instance of UUID");
+        return ResponseEntity.ok().body("Client remote succesfull!");
     }
 }
