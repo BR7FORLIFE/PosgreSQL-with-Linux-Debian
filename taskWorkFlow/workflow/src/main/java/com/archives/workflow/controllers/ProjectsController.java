@@ -25,7 +25,6 @@ public class ProjectsController {
      * - tengo que arreglar el problema de que debo validar que el client_id exista
      * antes de agregar el projecto
      */
-
     private final ProjectService projectService;
 
     public ProjectsController(ProjectService projectService) {

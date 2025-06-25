@@ -66,7 +66,7 @@ public class ProjectRepositoryImp implements ProjectGlobalInterface {
     }
 
     @Override
-    public void deleteProject(Integer id) {
+    public void deleteProject(UUID client_id,Integer id) {
         jdbcTemplate.update(deleteQuery, id);
     }
 }

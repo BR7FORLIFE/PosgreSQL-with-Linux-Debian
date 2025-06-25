@@ -47,7 +47,7 @@ public class ProjectService implements ProjectGlobalInterface {
     }
 
     @Override
-    public void deleteProject(Integer id) {
-        projectRepositoryImp.deleteProject(id);
+    public void deleteProject(UUID client_id,Integer id) {
+        projectRepositoryImp.deleteProject(client_id,id);
     }
 }

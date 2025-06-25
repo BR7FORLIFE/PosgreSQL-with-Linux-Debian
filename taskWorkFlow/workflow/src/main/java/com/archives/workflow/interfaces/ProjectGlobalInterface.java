@@ -18,5 +18,5 @@ public interface ProjectGlobalInterface {
     void editProject(UUID client_id, Integer id, Projects project);
 
     // delete
-    void deleteProject(Integer id);
+    void deleteProject(UUID client_id,Integer id);
 }
