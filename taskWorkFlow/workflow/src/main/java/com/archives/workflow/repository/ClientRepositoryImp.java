@@ -18,7 +18,7 @@ public class ClientRepositoryImp implements ClientGlobalInterface {
 
     // querys for the client sql
     private String readQuery = "SELECT id, name, lastname, email, username, password, rol FROM clients";
-    private String createQuery = "INSERT INTO clients (id, name, lastname, email, username, password, rol) VALUES (?,?,?,?,?,?,?)";
+    private String createQuery = "INSERT INTO clients (name, lastname, email, username, password, rol) VALUES (?,?,?,?,?,?)";
     private String updateQuery = "UPDATE clients SET name = ?, lastname = ?, email = ?, username = ? , password = ?, rol = ? WHERE id = ?";
     private String deleteQuery = "DELETE FROM clients WHERE id = ?";
 
@@ -77,7 +77,7 @@ public class ClientRepositoryImp implements ClientGlobalInterface {
 
     @Override
     public void saveClient(Client client) {
-        jdbcTemplate.update(createQuery, client.getId(), client.getName(), client.getLastname(), client.getEmail(),
+        jdbcTemplate.update(createQuery, client.getName(), client.getLastname(), client.getEmail(),
                 client.getUsername(), client.getPassword(), client.getRol());
     }
 
