@@ -38,7 +38,7 @@ public class ClientService implements ClientGlobalInterface {
 
     @Override
     public Boolean getExitsForClient(UUID id) {
-        return null;
+        return clientRepositoryImp.getExitsForClient(id);
     }
 
     @Override
