@@ -16,7 +16,7 @@ public class ProjectRepositoryImp implements ProjectGlobalInterface {
 
     private final JdbcTemplate jdbcTemplate;
     private final String readQuery = "SELECT id, name, description, date, status , client_id FROM projects";
-    private final String createQuery = "INSERT INTO projects(id, name, description, date, status ,client_id) VALUES (?,?,?,?,?,?)";
+    private final String createQuery = "INSERT INTO projects(name, description, date, status ,client_id) VALUES (?,?,?,?,?)";
     private final String updateQuery = "UPDATE projects SET name = ?, description = ?, status = ? WHERE id = ?";
 
     private final String deleteQuery = "DELETE FROM projects WHERE id = ?";
@@ -43,7 +43,7 @@ public class ProjectRepositoryImp implements ProjectGlobalInterface {
     }
 
     @Override
-    public void createProject(UUID id, Projects project) {
+    public void createProject(UUID client_id, Projects project) {
         jdbcTemplate.update(createQuery, project.getId(), project.getName(), project.getDescription(),
                 project.getDate(), project.getStatus(), project.getClient_id());
     }
