@@ -22,11 +22,9 @@ public class ProjectService implements ProjectGlobalInterface {
 
     @Override
     public void createProject(UUID client_id, Projects project) {
-        // ToDo
-        // [] debo hacer una logica para corroborar que de vd exista dicho usuario en la
-        // base de datos!
+        Boolean existUser = clientRepositoryImp.getExitsForClient(client_id);
 
-        if (true) {
+        if (existUser) {
             projectRepositoryImp.createProject(client_id, project);
         }
     }
@@ -43,11 +41,11 @@ public class ProjectService implements ProjectGlobalInterface {
 
     @Override
     public void editProject(UUID client_id, Integer id, Projects project) {
-        projectRepositoryImp.editProject(client_id, id ,project);
+        projectRepositoryImp.editProject(client_id, id, project);
     }
 
     @Override
-    public void deleteProject(UUID client_id,Integer id) {
-        projectRepositoryImp.deleteProject(client_id,id);
+    public void deleteProject(UUID client_id, Integer id) {
+        projectRepositoryImp.deleteProject(client_id, id);
     }
 }
