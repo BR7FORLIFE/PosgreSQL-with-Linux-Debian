@@ -31,8 +31,6 @@ public class ClientService implements ClientGlobalInterface {
 
     @Override
     public Client getForRol(Client client) {
-        if (client == null)
-            return null; // <-- por si el cliente es vacio
         return clientRepositoryImp.getForRol(client);
     }
 
