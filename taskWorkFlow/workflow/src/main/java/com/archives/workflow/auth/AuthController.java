@@ -30,6 +30,7 @@ public class AuthController {
     @PostMapping("/auth/login")
     public ResponseEntity<?> loginRegister(@RequestBody AuthenticationRequest loginAuth) {
         try {
+            
             return ResponseEntity.status(HttpStatus.FOUND).body("Credential is correct!");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Credential is not correct!");
