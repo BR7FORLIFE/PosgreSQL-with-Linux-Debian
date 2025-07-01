@@ -1,18 +1,18 @@
-package com.archives.workflow.auth;
+package com.archives.workflow.auth.ObjectAuth;
 
 public class AuthenticationRequest {
-    private String email;
+    private String user;
     private String password;
 
     public AuthenticationRequest() {
     }
 
-    public String getEmail() {
-        return email;
+    public String getUser() {
+        return user;
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.user = email;
     }
 
     public String getPassword() {

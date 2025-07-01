@@ -1,4 +1,4 @@
-package com.archives.workflow.auth.objectsAuth;
+package com.archives.workflow.auth.ObjectAuth;
 
 import java.util.Date;
 
