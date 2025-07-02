@@ -18,13 +18,24 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AuthServices {
 
-    /* (spring security) <-- esto es una interfaz que permite autenticar a un usuario segun la request que decidas ejemplo usuario y contraseña */
-    private final AuthenticationManager authenticationManager; 
+    /*
+     * (spring security) <-- esto es una interfaz que permite autenticar a un
+     * usuario segun la request que decidas ejemplo usuario y contraseña
+     */
+    private final AuthenticationManager authenticationManager;
 
-    /* <--(clase propia)  esto permite acceder a los diferentes servicios de jwtServices como el generar el jwt para el usuario*/
-    private final JwtServices jwtServices; 
+    /*
+     * <--(clase propia) esto permite acceder a los diferentes servicios de
+     * jwtServices como el generar el jwt para el usuario
+     */
+    private final JwtServices jwtServices;
 
-     /*<-- interfaz que permite cargar un usuario en la base de datos para validar que de vd este registrado OJO para que pueda hacer esa magia es necesario crear un clase que herede d euserDetailsServices y definir ahi como lo va a hacer como un rowmapper*/
+    /*
+     * <-- interfaz que permite cargar un usuario en la base de datos para validar
+     * que de vd este registrado OJO para que pueda hacer esa magia es necesario
+     * crear un clase que herede d euserDetailsServices y definir ahi como lo va a
+     * hacer como un rowmapper
+     */
     private final UserDetailsService userDetailsService;
 
     public void register(RegisterAuth request) {
@@ -36,10 +47,8 @@ public class AuthServices {
                 new UsernamePasswordAuthenticationToken(request.getUser(), request.getPassword()));
 
         UserDetails user = userDetailsService.loadUserByUsername(request.getUser());
-        //String jwt = jwtServices.generateToken(user);
+        String jwt = jwtServices.generateToken(user);
 
-        //return new AuthenticationResponse(jwt);
-
-        return null;    
+        return new AuthenticationResponse(jwt);
     }
 }
