@@ -1,6 +1,7 @@
 package com.archives.workflow.auth;
 
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -42,13 +43,37 @@ public class AuthServices {
 
     }
 
-    public AuthenticationResponse login(AuthenticationRequest request) {
-        Authentication auth = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getUser(), request.getPassword()));
+    public AuthenticationResponse login(AuthenticationRequest request) throws RuntimeException {
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(request.getUser(), request.getPassword()));
 
-        UserDetails user = userDetailsService.loadUserByUsername(request.getUser());
-        String jwt = jwtServices.generateToken(user);
+            /*guardamos el userdetails de authentication */
+            UserDetails user = (UserDetails) authentication.getPrincipal(); 
+            String jwt = jwtServices.generateToken(user);
 
-        return new AuthenticationResponse(jwt);
+            return new AuthenticationResponse(jwt);
+        } catch (BadCredentialsException e) {
+            throw new RuntimeException("Credenciales incorrectas");
+        }
     }
 }
+
+// flujo de authenticationManager.authenticate
+
+/*
+ * [Request] → login(user, password)
+ * ↓
+ * UsernamePasswordAuthenticationToken
+ * ↓
+ * authenticationManager.authenticate(...)
+ * ↓
+ * UserDetailsService.loadUserByUsername()
+ * ↓
+ * Validación de contraseña
+ * ↓
+ * ✅ o ❌
+ * 
+ * 
+ * si es ❌ lanza una exception BadCredentialException
+ */
