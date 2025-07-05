@@ -51,7 +51,11 @@ public class AuthController {
      */
     @PostMapping("/auth/login")
     public ResponseEntity<AuthenticationResponse> loginUser(@RequestBody AuthenticationRequest request) {
-        AuthenticationResponse response = authServices.login(request);
-        return ResponseEntity.ok().body(response);
+        /*AuthenticationRequest es una clase que posee el username y el 
+        password del usuario */
+
+        //es la respuesta que se va a enviar si todo sale bien
+        AuthenticationResponse response = authServices.login(request); 
+        return ResponseEntity.ok().body(response); // enviamos la respuesta con status 200
     }
 }
