@@ -5,7 +5,6 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import com.archives.workflow.auth.ObjectAuth.AuthenticationRequest;
@@ -37,8 +36,6 @@ public class AuthServices {
      * crear un clase que herede d euserDetailsServices y definir ahi como lo va a
      * hacer como un rowmapper
      */
-    private final UserDetailsService userDetailsService;
-
     public void register(RegisterAuth request) {
 
     }
@@ -48,8 +45,8 @@ public class AuthServices {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(request.getUser(), request.getPassword()));
 
-            /*guardamos el userdetails de authentication */
-            UserDetails user = (UserDetails) authentication.getPrincipal(); 
+            /* guardamos el userdetails de authentication */
+            UserDetails user = (UserDetails) authentication.getPrincipal();
             String jwt = jwtServices.generateToken(user);
 
             return new AuthenticationResponse(jwt);
