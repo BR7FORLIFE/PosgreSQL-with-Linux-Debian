@@ -6,8 +6,6 @@ import java.util.Date;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import com.archives.workflow.auth.ObjectAuth.RegisterAuth;
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -32,7 +30,7 @@ public class JwtServices {
         return null;
     }
 
-    public boolean isTokenValid(String token, RegisterAuth registerAuth) { // <-- valid the token for the user
+    public boolean isTokenValid(String token, UserDetails userDetails) { // <-- valid the token for the user
         return false;
     }
 
