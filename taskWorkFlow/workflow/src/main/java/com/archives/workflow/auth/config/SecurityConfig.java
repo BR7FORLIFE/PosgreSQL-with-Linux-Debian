@@ -25,7 +25,7 @@ public class SecurityConfig {
     // private final JwtAuthenticationFilter jwtAuthFilter;
     private final UserDetailsService userDetailsService;
     private final JwtFilterMiddleware jwtFilterMiddleware;
-    
+
     /**
      * 
      * @param httpSecurity
@@ -36,13 +36,27 @@ public class SecurityConfig {
     /* SecurityFilterChain - Define qué rutas están protegidas y qué filtros usar */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        /**
+         * orden de como se debe concatenar los metodos para una buena configuracion
+         * 1 - .csrf()
+         * 
+         * 2 - .authorizeHttpRequests()
+         * 
+         * 3 - .sessionManagement()
+         * 
+         * 4 - .authenticationProvider()
+         * 
+         * 5 - .addFilterBefore(...)
+         * 
+         * 6 - .build()
+         */
         return httpSecurity
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**").permitAll() // <-- Permite login y registro sin token
+                        .requestMatchers("/auth/**").permitAll() // <-- permite login y registro sin token
                         .anyRequest().authenticated())
                 .sessionManagement(sess -> sess
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // <-- No sesiones
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // <-- no sesiones
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtFilterMiddleware, UsernamePasswordAuthenticationFilter.class) // <-- JWT primero
                 .build();
@@ -65,5 +79,15 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(); // <-- Nunca guardes contraseñas planas
     }
+    // nota! cuando se retorna una clase se usa el nombre del metodo ejemplo:
 
+    /*
+     * public Persona crearPersona(String nombre) {
+     * return new Persona(nombre);
+     * }
+     * 
+     * public Persona crearPersona(String nombre) {
+     * return new Persona(nombre);
+     * }
+     */
 }
