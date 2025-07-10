@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.archives.workflow.constants.ProjectResponseEntity;
+import com.archives.workflow.components.ProjectResponseEntity;
 import com.archives.workflow.models.Projects;
 import com.archives.workflow.services.ProjectService;
 
