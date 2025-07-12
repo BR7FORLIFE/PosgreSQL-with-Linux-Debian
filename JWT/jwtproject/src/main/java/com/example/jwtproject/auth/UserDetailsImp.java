@@ -5,14 +5,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.example.jwtproject.repository.UserImp;
+import com.example.jwtproject.repository.UserRepositoryImp;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class UserDetailsImp implements UserDetailsService {
-    private final UserImp userImp;
+    private final UserRepositoryImp userImp;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
