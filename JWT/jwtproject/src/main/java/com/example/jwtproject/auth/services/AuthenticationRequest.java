@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Data
 public class AuthenticationRequest {
+    private final int id;
     private final String username;
     private final String password;
     private final Rol rol;

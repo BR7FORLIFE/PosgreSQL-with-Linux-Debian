@@ -13,9 +13,10 @@ import com.example.jwtproject.enums.Rol;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-static @Data
+@Data
 @RequiredArgsConstructor
 public class UserModel implements UserDetails {
+    private final int id;
     private final String name;
     private final Rol rol;
     private final String password;

@@ -23,7 +23,7 @@ public class AuthServices {
     private final AuthenticationManager authenticationManager; //motor de validacion de authentication
     
     public AuthenticationResponse register(AuthenticationRequest requestUserRegister){
-        UserModel userEncripting = new UserModel(requestUserRegister.getUsername(), requestUserRegister.getRol(), passwordEncoder.encode(requestUserRegister.getPassword()));
+        UserModel userEncripting = new UserModel(requestUserRegister.getId(),requestUserRegister.getUsername(), requestUserRegister.getRol(), passwordEncoder.encode(requestUserRegister.getPassword()));
         userRepositoryImp.saveUser(userEncripting);
         String token = jwtService.generateToken(userEncripting);
         return new AuthenticationResponse(token);

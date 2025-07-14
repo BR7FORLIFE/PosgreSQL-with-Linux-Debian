@@ -12,7 +12,7 @@ import com.example.jwtproject.models.UserModel;
 @Repository
 public class UserRepositoryImp implements UserInterface{
 
-    private List<UserModel> users = List.of(new UserModel("bryan", Rol.USER, "123"), new UserModel("maria", Rol.ADMIN, "456"));
+    private List<UserModel> users = List.of(new UserModel(1,"bryan", Rol.USER, "123"), new UserModel(2,"maria", Rol.ADMIN, "456"));
     
     @Override 
     public UserModel saveUser(UserModel userModel){
