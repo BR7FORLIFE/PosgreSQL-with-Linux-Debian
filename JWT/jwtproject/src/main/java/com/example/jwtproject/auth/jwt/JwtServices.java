@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.example.jwtproject.models.UserModel;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -29,7 +30,7 @@ public class JwtServices {
     private String SECRET_KEY;
 
     // esto nos permite tomar el secret key y decoficarlo a bytes (256 bit - 32
-    // caracteres) y usarlo como firma
+    // bytes) y usarlo como firma
     // o signature del json web token
     private SecretKey key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes(StandardCharsets.UTF_8));
 
@@ -52,16 +53,21 @@ public class JwtServices {
     }
 
     private Claims extractAllClaims(String token) {
-        JwtParser parser =  Jwts.parser().verifyWith(key).build();
-        return parser.parseSignedClaims(token).getPayload();
+        try {
+            JwtParser parser =  Jwts.parser().verifyWith(key).build();
+            return parser.parseSignedClaims(token).getPayload();
+        } catch (JwtException | IllegalArgumentException e) {
+            throw new JwtException("jwt key invalid!");
+        }
     }
 
     public boolean isValidToken(String token, UserDetails userDetails) {
-        final String username = extractAllClaims(token).getSubject();
-        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+        final String payloadJwt = extractAllClaims(token).getSubject();
+        Integer userId = ((UserModel) userDetails).getId();
+        return (payloadJwt.equals(String.valueOf(userId)) && !isTokenExpired(token));
     }
 
-    public String extractIDUsername(String token){
+    public String extractIdUsername(String token){
         return extractAllClaims(token).getSubject();
     } 
 
