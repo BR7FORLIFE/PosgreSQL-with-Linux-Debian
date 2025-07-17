@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 @Data
 @RequiredArgsConstructor
 public class UserModel implements UserDetails {
-    private final int id;
+    private final Integer id;
     private final String name;
     private final Rol rol;
     private final String password;
