@@ -16,7 +16,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.example.jwtproject.auth.jwt.JwtFilterMiddleware;
 
-import jakarta.servlet.Filter;
 import lombok.RequiredArgsConstructor;
 
 @Configuration
@@ -28,21 +27,31 @@ public class SecurityConfig{
     
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-        return null;
+        return 
+            http
+            .csrf(request -> request.disable())
+            .authorizeHttpRequests(req -> req.requestMatchers("/auth/**").permitAll()
+                                             .anyRequest().authenticated())
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authenticationProvider(authenticationProvider())
+            .addFilterBefore(jwtFilterMiddleware, UsernamePasswordAuthenticationFilter.class)
+            .build();
     }
 
     @Bean
     public AuthenticationProvider authenticationProvider(){
-        return null;
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider(userDetailsService);
+        authenticationProvider.setPasswordEncoder(passwordEncoder());
+        return authenticationProvider;
     }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception{
-     return null;
+     return config.getAuthenticationManager();
     }
 
     @Bean
     public PasswordEncoder passwordEncoder(){
-        return null;
+        return new BCryptPasswordEncoder();
     }
 }
