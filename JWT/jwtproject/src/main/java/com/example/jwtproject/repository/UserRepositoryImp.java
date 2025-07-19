@@ -1,5 +1,6 @@
 package com.example.jwtproject.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,7 +13,7 @@ import com.example.jwtproject.models.UserModel;
 @Repository
 public class UserRepositoryImp implements UserInterface{
 
-    private List<UserModel> users = List.of(new UserModel(1,"bryan", Rol.USER, "123"), new UserModel(2,"maria", Rol.ADMIN, "456"));
+    private List<UserModel> users = new ArrayList<>(List.of(new UserModel(1,"bryan", Rol.USER, "123"), new UserModel(2,"maria", Rol.ADMIN, "456")));
     
     @Override 
     public UserModel saveUser(UserModel userModel){
@@ -27,6 +28,6 @@ public class UserRepositoryImp implements UserInterface{
 
     @Override
     public UserModel findUserByUsername(String username) {
-       return users.stream().filter(user -> user.equals(username)).findFirst().orElseThrow(() -> new UsernameNotFoundException("username not found!"));
+       return users.stream().filter(user -> user.getUsername().equals(username)).findFirst().orElseThrow(() -> new UsernameNotFoundException("username not found!"));
     }
 }
