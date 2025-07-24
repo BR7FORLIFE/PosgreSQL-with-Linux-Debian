@@ -21,14 +21,14 @@ public class AuthServices {
     private final PasswordEncoder passwordEncoder; // interfaz de spring security para encriptar las contraseñas
     private final UserRepositoryImp userRepositoryImp; // mi repositorio para verificar en la base de datos
     private final AuthenticationManager authenticationManager; //motor de validacion de authentication
-    
+        
     public AuthenticationResponse register(AuthenticationRequest requestUserRegister){
         UserModel userEncripting = new UserModel(requestUserRegister.getId(),requestUserRegister.getUsername(), requestUserRegister.getRol(), passwordEncoder.encode(requestUserRegister.getPassword()));
         userRepositoryImp.saveUser(userEncripting);
         String token = jwtService.generateToken(userEncripting);
         return new AuthenticationResponse(token);
     }
-
+    
     public AuthenticationResponse login(AuthenticationRequest requestUserLogin){
         authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(requestUserLogin.getUsername(), requestUserLogin.getPassword())
