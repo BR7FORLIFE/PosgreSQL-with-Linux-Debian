@@ -7,6 +7,7 @@ import java.util.Date;
 import javax.crypto.SecretKey;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.notionconcept.notionconcept.models.UserModel;
@@ -49,7 +50,7 @@ public class JwtServices {
                 .compact();
     }
 
-    private Claims extractALlClaims(String token){
+    private Claims extractALlClaims(String token) {
         try {
             JwtParser parser = Jwts.parser().verifyWith(key).build();
             return parser.parseSignedClaims(token).getPayload();
@@ -58,4 +59,23 @@ public class JwtServices {
             throw new JwtException("jwt key invalid!");
         }
     }
+
+    public boolean isValidToken(String token, UserDetails userDetails) {
+        final String payloadJwt = extractALlClaims(token).getSubject();
+        String username = userDetails.getUsername();
+        return (payloadJwt.equals(String.valueOf(username))) && !isTokenExpired(token);
+    }
+
+    public String extractUsername(String token) {
+        return extractALlClaims(token).getSubject();
+    }
+
+    public String extractRol(String token) {
+        return extractALlClaims(token).get("rol", String.class);
+    }
+
+    public boolean isTokenExpired(String token) {
+        return extractALlClaims(token).getExpiration().before(new Date());
+    }
+
 }
