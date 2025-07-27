@@ -28,7 +28,7 @@ public class AuthServices {
 
         userRepository.saveUser(userEncryting);
         // aca generamos el jwt para el usuario!
-        String token = null;
+        String token = jwtServices.generateToken(userEncryting);
         return new AuthenticationResponse(token);
     }
 
@@ -38,7 +38,7 @@ public class AuthServices {
         UserModel user = userRepository.findbyUsername(request.name);
 
         // aca generamos el jwt para el usuario!
-        String token = null;
+        String token = jwtServices.generateToken(user);
 
         return new AuthenticationResponse(token);
     }
