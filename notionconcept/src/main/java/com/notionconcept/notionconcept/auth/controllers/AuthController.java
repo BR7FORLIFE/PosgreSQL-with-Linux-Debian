@@ -20,11 +20,13 @@ public class AuthController {
 
     @GetMapping("/register")
     public ResponseEntity<AuthenticationResponse> reguster(@RequestBody AuthenticationRequest request){
-        return ResponseEntity.ok().body(new AuthenticationResponse(null));
+        AuthenticationResponse response = authServices.register(request);
+        return ResponseEntity.ok().body(response);
     }
 
     @GetMapping("/login")
     public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest request){
-        return ResponseEntity.ok().body(new AuthenticationResponse(null));
+        AuthenticationResponse response = authServices.login(request);
+        return ResponseEntity.ok().body(response);
     }
 }
