@@ -1,0 +1,5 @@
+### Login session
+POST http://localhost:8080/api/auth/login HTTP/1.1
+Authorization: Basic QnJ5YW46MTIz
+
+
