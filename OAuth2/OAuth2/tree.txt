@@ -1,0 +1,69 @@
+.
+├── HELP.md
+├── mvnw
+├── mvnw.cmd
+├── pom.xml
+├── src
+│  ├── main
+│  │  ├── java
+│  │  │  └── com
+│  │  │     └── archives
+│  │  │        └── OAuth2
+│  │  │           ├── controllers
+│  │  │           ├── OAuth2Application.java
+│  │  │           ├── security
+│  │  │           │  ├── config
+│  │  │           │  │  └── SecurityConfig.java
+│  │  │           │  ├── filter
+│  │  │           │  ├── handler
+│  │  │           │  ├── model
+│  │  │           │  ├── services
+│  │  │           │  └── utils
+│  │  │           └── services
+│  │  └── resources
+│  │     ├── application.yml
+│  │     ├── static
+│  │     └── templates
+│  └── test
+│     └── java
+│        └── com
+│           └── archives
+│              └── OAuth2
+│                 └── OAuth2ApplicationTests.java
+├── target
+│  ├── classes
+│  │  ├── application.yml
+│  │  └── com
+│  │     └── archives
+│  │        └── OAuth2
+│  │           ├── controllers
+│  │           ├── OAuth2Application.class
+│  │           ├── security
+│  │           │  ├── config
+│  │           │  │  └── SecurityConfig.class
+│  │           │  ├── filter
+│  │           │  ├── handler
+│  │           │  ├── model
+│  │           │  ├── services
+│  │           │  └── utils
+│  │           └── services
+│  ├── generated-sources
+│  │  └── annotations
+│  ├── generated-test-sources
+│  │  └── test-annotations
+│  ├── maven-status
+│  │  └── maven-compiler-plugin
+│  │     ├── compile
+│  │     │  └── default-compile
+│  │     │     ├── createdFiles.lst
+│  │     │     └── inputFiles.lst
+│  │     └── testCompile
+│  │        └── default-testCompile
+│  │           ├── createdFiles.lst
+│  │           └── inputFiles.lst
+│  └── test-classes
+│     └── com
+│        └── archives
+│           └── OAuth2
+│              └── OAuth2ApplicationTests.class
+└── tree.txt
